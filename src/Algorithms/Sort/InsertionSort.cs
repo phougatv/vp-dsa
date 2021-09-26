@@ -8,10 +8,10 @@ public class InsertionSort
         if (array.HasOnlyOneItem())
             return array;
 
-        return ProtectedSort(array);
+        return SortBySwappingItemsAfterEachComparision(array);
     }
 
-    protected Int32[] ProtectedSort(Int32[] array)
+    protected Int32[] SortBySwappingItemsAfterEachComparision(Int32[] array)
     {
         var i = 1;
         Int32 j;
@@ -24,6 +24,27 @@ public class InsertionSort
                 j = j - 1;
             }
 
+            i = i + 1;
+        }
+
+        return array;
+    }
+
+    protected Int32[] SortBySwappingItemsInOneGo(Int32[] array)
+    {
+        var i = 1;
+        Int32 j, item;
+        while(i < array.Length)
+        {
+            item = array[i];
+            j = i - 1;
+            while(j >= 0 && (array[j] > item))
+            {
+                array[j + 1] = array[j];
+                j = j - 1;
+            }
+
+            array[j + 1] = item;
             i = i + 1;
         }
 
