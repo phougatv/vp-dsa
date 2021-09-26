@@ -21,7 +21,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\..\..\src\Algorithms\VP.DSA.Algorithms.csproj" />
+    <ProjectReference Include="..\..\..\src\Algorithms\VP.DSA.Algorithms.csproj" />
   </ItemGroup>
 
 </Project>
