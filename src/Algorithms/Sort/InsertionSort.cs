@@ -8,7 +8,7 @@ public class InsertionSort
         if (array.HasOnlyOneItem())
             return array;
 
-        return SortBySwappingItemsAfterEachComparision(array);
+        return SortBySwappingItemsInOneGo(array);
     }
 
     protected Int32[] SortBySwappingItemsAfterEachComparision(Int32[] array)
