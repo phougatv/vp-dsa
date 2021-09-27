@@ -27,11 +27,15 @@
 		3. [Radix sort](#radix-sort "Go to Radix sort")
 
 #### Insertion sort
-> Insertion sort iterates, consuming one input element each repetition, and grows a sorted output list.<br>
-> At each iteration, insertion sort removes one element from the input data, finds the location it belongs withing the sorted list, and inserts it there. It repeats until not input elements remain.<br>
+First go through [_Why is insertion sort Θ(n^2) in average cases?_](https://stackoverflow.com/questions/17055341/why-is-insertion-sort-%ce%98n2-in-the-average-case/17055342#17055342).
+> _InsertionSort_ iterates, consuming one input element each repetition, and grows a sorted output list.<br>
+> At each iteration, it removes one element from the input data, finds the location it belongs withing the sorted list, and inserts it there. It repeats until no input elements remain.<br>
 > <br>
-> **Best case:** When the array is already sorted - in this case it has a linear running time (_O(n)_). During each iteration, the first remaining element of the input is only compared with the right-most element of the sorted subsection of the array.<br>
-> **Worst case:**
+> **Best case&#8594; When an array is already sorted:** It has a linear running time (**_O(n)_**). During each iteration, the first remaining element of the input is only compared with the right-most element of the sorted subsection of the array.<br>
+> **Worst case&#8594; When an array is sorted in reverse:** It has a quadratic running time (**_O(n^2)_**). During each iteration, the inner loop will compare and shift the entire sorted subsection of the array before inserting the next element.<br>
+> **Average case&#8594;** It has a quadratic running time (**_O(n*n)_**).<br>
+> <br>
+> This makes the _InsertionSort_ impractical for sorting large arrays. However, it is one of the fastest algorithms for sorting very small arrays, even faster than _QuickSort_; indeed, good _QuickSort_ implementations use _InsertionSort_ for arrays smaller than a certain threshold, also when arising as subproblems; the exact threshold must be determined experimentally and depends on the machine, but is commonly around ten.
 #### Selection sort
 
 #### Merge sort
