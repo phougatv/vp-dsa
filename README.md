@@ -36,7 +36,9 @@ First go through [_Why is insertion sort Θ(n^2) in average cases?_](https://sta
 > **Average case&#8594;** It has a quadratic running time (**_Θ(n^2)_**).<br>
 > <br>
 > This makes the _InsertionSort_ impractical for sorting large arrays. However, it is one of the fastest algorithms for sorting very small arrays, even faster than _QuickSort_; indeed, good _QuickSort_ implementations use _InsertionSort_ for arrays smaller than a certain threshold, also when arising as subproblems; the exact threshold must be determined experimentally and depends on the machine, but is commonly around ten.
+
 #### Selection sort
+
 
 #### Merge sort
 
