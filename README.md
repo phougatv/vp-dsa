@@ -45,7 +45,8 @@ First go through [_Why is insertion sort Θ(n^2) in average cases?_](https://sta
 > 	2. Find the smallest element in the unsorted sublist.<br>
 > 	3. Exchange/swap itwith left most unsorted element and moving the sublist boundaries one element to the right.<br>
 > 
-> **_One thing which distinguishes selection sort from other sorting algorithms is that it makes the minimum possible number of swaps, n − 1 in the worst case._**<br><br>
+> **_One thing which distinguishes selection sort from other sorting algorithms is that it makes the minimum possible number of swaps, n − 1 in the worst case._**
+> Thus, in applications where the cost of swapping items is high, selection sort very well may be the algorithm of choice.<br><br>
 > **Best case&#8594; When an array is already sorted:** Quadratic running time (**_Θ(n^2)_**), because for every iteration, it will run **_n_** times to find the smallest element. Although, there will be no swaps.<br>
 > **Worst case&#8594; When an array is sorted in reverse:** Quadratic running time (**_Θ(n^2)_**).<br>
 > **Average case&#8594;** Quadratic running time (**_Θ(n^2)_**).<br>
