@@ -2,16 +2,23 @@
 public static class Extension
 {
     /// <summary>
-    /// Swaps the elements of array at indices i and j.
+    /// Swaps the elements of array at indices indexOne and indexTwo.
     /// </summary>
     /// <param name="array">The array.</param>
-    /// <param name="i">The index i.</param>
-    /// <param name="j">The index j.</param>
-    public static void Swap(this Int32[] array, Int32 i, Int32 j)
+    /// <param name="indexOne">The index one.</param>
+    /// <param name="indexTwo">The index two.</param>
+    public static void Swap(this Int32[] array, Int32 indexOne, Int32 indexTwo)
     {
-        array[i] = array[i] + array[j];
-        array[j] = array[i] - array[j];
-        array[i] = array[i] - array[j];
+        if (array.IsEmpty() || array.HasOnlyOneItem())
+            throw new ArgumentException($"{nameof(array)} must have 2 or more items.");
+        if (indexOne.IsNegative() || indexOne > array.Length - 1)
+            throw new ArgumentOutOfRangeException(nameof(indexOne));
+        if (indexTwo.IsNegative() || indexTwo > array.Length - 1)
+            throw new ArgumentOutOfRangeException(nameof(indexOne));
+
+        array[indexOne] = array[indexOne] + array[indexTwo];
+        array[indexTwo] = array[indexOne] - array[indexTwo];
+        array[indexOne] = array[indexOne] - array[indexTwo];
     }
 
     /// <summary>
@@ -41,14 +48,10 @@ public static class Extension
     /// <returns></returns>
     public static Int32 GetIndexOfMin(this Int32[] array, Int32 lowerBound, Int32 upperBound)
     {
-        if (lowerBound.IsNegative())
-            throw new InvalidOperationException($"lowerBound: {lowerBound}, value cannot be negative.");
-        if (upperBound.IsNegative())
-            throw new InvalidOperationException($"upperBound: {upperBound}, value cannot be negative.");
-        if (lowerBound >= array.Length)
-            throw new InvalidOperationException($"lowerBound: {lowerBound}, value must be less than array's length.");
-        if (upperBound >= array.Length)
-            throw new InvalidOperationException($"upperBound: {upperBound}, value must be less than array's length.");
+        if (lowerBound.IsNegative() || lowerBound > array.Length - 1)
+            throw new ArgumentOutOfRangeException(nameof(lowerBound));
+        if (upperBound.IsNegative() || upperBound > array.Length - 1)
+            throw new ArgumentOutOfRangeException(nameof(upperBound));
 
         var minIndex = lowerBound;
         var minItem = array[lowerBound];
@@ -59,6 +62,7 @@ public static class Extension
                 minItem = array[lowerBound];
                 minIndex = lowerBound;
             }
+
             lowerBound = lowerBound + 1;
         }
 
