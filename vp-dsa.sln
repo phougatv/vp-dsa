@@ -27,6 +27,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "VP.DSA.Algorithms", "src\Al
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "VP.DSA.Algorithms.UnitTests", "test\UnitTests\Algorithms\VP.DSA.Algorithms.UnitTests.csproj", "{B4238361-BCDD-43C3-A58C-FF140B1185AC}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "VP.DSA.DataStructures", "src\DataStructures\VP.DSA.DataStructures.csproj", "{BD5FF8FA-A51D-4AB6-9608-D54C51B04FF1}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -41,6 +43,10 @@ Global
 		{B4238361-BCDD-43C3-A58C-FF140B1185AC}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B4238361-BCDD-43C3-A58C-FF140B1185AC}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B4238361-BCDD-43C3-A58C-FF140B1185AC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BD5FF8FA-A51D-4AB6-9608-D54C51B04FF1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BD5FF8FA-A51D-4AB6-9608-D54C51B04FF1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BD5FF8FA-A51D-4AB6-9608-D54C51B04FF1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BD5FF8FA-A51D-4AB6-9608-D54C51B04FF1}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -56,6 +62,7 @@ Global
 		{6A6DD44C-0FA6-4175-9EEC-1FFC82FD92B8} = {9B95BD62-4039-4D10-B244-A1A32320E5A4}
 		{0993C97A-4B61-40C0-ADEE-ED28D49F0717} = {9528AAD0-B28F-4885-ADED-E02A502807FB}
 		{B4238361-BCDD-43C3-A58C-FF140B1185AC} = {65B4C28B-1D6C-4D18-B444-41B75BBB64DE}
+		{BD5FF8FA-A51D-4AB6-9608-D54C51B04FF1} = {6C0D48C7-E31E-4511-872F-18F69A23BD21}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {A6C3FF43-874F-414E-B501-9B31D392F4DC}
