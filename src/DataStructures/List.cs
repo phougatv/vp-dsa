@@ -18,7 +18,22 @@ public class List<T> : IList<T>
     #endregion Protected Properties
 
     #region Public Properties
-    public T this[Int32 index] { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+    public T this[Int32 index]
+    {
+        get
+        {
+            if ((UInt32)index >= (UInt32)_count)
+                throw new ArgumentOutOfRangeException(nameof(index));
+            return _array[index];
+        }
+        set
+        {
+            if ((UInt32)index >= (UInt32)_count)
+                throw new ArgumentOutOfRangeException(nameof(index));
+
+            _array[index] = value;
+        }
+    }
 
     public Int32 Capacity
     {
