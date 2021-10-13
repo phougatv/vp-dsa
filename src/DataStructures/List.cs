@@ -6,15 +6,14 @@ using VP.DSA.Shared;
 public class List<T> : IList<T>
 {
     #region Private Variables
-    private const Int32 MaxArrayLength = 0x7FEFFFFF;
+    private const Int32 MaxArrayLength = 0x7FEFFFFF;    // As per C# this is the maximum number of elements an array can have.
     private const Int32 DefaultCapacity = 4;
     private static readonly T[] _emptyArray = Array.Empty<T>();
     private T[] _array;
-    private Int32 _count;
     #endregion Private Variables
 
     #region Protected Properties
-    protected Boolean IsCapacityMatched => _array.Length == _count;
+    protected Boolean IsCapacityMatched => _array.Length == Count;
     #endregion Protected Properties
 
     #region Public Properties
@@ -22,13 +21,13 @@ public class List<T> : IList<T>
     {
         get
         {
-            if ((UInt32)index >= (UInt32)_count)
+            if ((UInt32)index >= (UInt32)Count)
                 throw new ArgumentOutOfRangeException(nameof(index));
             return _array[index];
         }
         set
         {
-            if ((UInt32)index >= (UInt32)_count)
+            if ((UInt32)index >= (UInt32)Count)
                 throw new ArgumentOutOfRangeException(nameof(index));
 
             _array[index] = value;
@@ -41,27 +40,16 @@ public class List<T> : IList<T>
         set
         {
             if (value.IsNegative())
-                throw new ArgumentOutOfRangeException(nameof(Capacity));
-            if (value != _count)
-            {
-                if (value.IsPositive())
-                {
-                    var newArray = new T[value];
-                    if (!IsEmpty)
-                        Array.Copy(_array, 0, newArray, 0, _count);
-                    _array = newArray;
-                }
-                else
-                {
-                    _array = _emptyArray;
-                }
-            }
+                throw new InvalidOperationException($"{nameof(Capacity)} cannot be -ve.");
+            SetCapacity(value);
+            if (value < Count)
+                Count = value;
         }
     }
 
-    public Int32 Count => _count;
+    public Int32 Count { get; private set; }
 
-    public Boolean IsEmpty => _count.IsZero();
+    public Boolean IsEmpty => Count.IsZero();
 
     public Boolean IsReadOnly => throw new NotImplementedException();
     #endregion Public Properties
@@ -69,15 +57,15 @@ public class List<T> : IList<T>
     public List()
     {
         _array = _emptyArray;
-        _count = 0;
+        Count = 0;
     }
 
     public List(Int32 capacity)
     {
         if (capacity.IsNegative())
-            throw new ArgumentOutOfRangeException(nameof(capacity));
+            throw new InvalidOperationException($"{nameof(capacity)} cannot be -ve.");
         _array = capacity.IsZero() ? _emptyArray : new T[capacity];
-        _count = 0;
+        Count = Capacity;
     }
 
     public List(IEnumerable<T> collection)
@@ -87,14 +75,14 @@ public class List<T> : IList<T>
 
         if (collection is ICollection<T> coll)
         {
-            _count = coll.Count;
+            Count = coll.Count;
             if (coll.Count.IsZero())
             {
                 _array = new T[DefaultCapacity];
             }
             else
             {
-                _array = new T[_count];
+                _array = new T[Count];
                 coll.CopyTo(_array, 0);
             }
         }
@@ -107,24 +95,30 @@ public class List<T> : IList<T>
         }
     }
 
+    #region Public Methods
     /// <summary> Adds the item to the end of the list. </summary>
     /// <param name="item">The item.</param>
     public void Add(T item)
     {
-        if (_count == 0)
+        if (Count == 0)
             _array = new T[DefaultCapacity];
         if (IsCapacityMatched)
-            EnsureCapacity(_count + 1);
-        _array[_count] = item;
-        _count = _count + 1;
+            EnsureCapacity(Count + 1);
+        _array[Count] = item;
+        Count = Count + 1;
     }
 
-    /// <summary> Clears the array. </summary>
+    /// <summary>
+    /// Clears the array by removing all the elements.
+    /// Sets the elements of the array to default values and Count to 0.
+    /// </summary>
     public void Clear()
     {
-        if (_array == null)
-            return;
-        Array.Clear(_array);
+        if (Count > 0)
+        {
+            Array.Clear(_array);
+            ResetCount();
+        }
     }
 
     /// <summary> Checks if the item exists in the list. </summary>
@@ -144,7 +138,7 @@ public class List<T> : IList<T>
     {
         if (item == null)
         {
-            for (Int32 i = 0; i < _count; i++)
+            for (Int32 i = 0; i < Count; i++)
             {
                 if (_array[i] == null)
                     return i;
@@ -154,7 +148,7 @@ public class List<T> : IList<T>
         }
 
         var comparer = EqualityComparer<T>.Default;
-        for (Int32 i = 0; i < _count; i++)
+        for (Int32 i = 0; i < Count; i++)
         {
             if (comparer.Equals(item, _array[i]))
                 return i;
@@ -186,18 +180,19 @@ public class List<T> : IList<T>
     /// <exception cref="ArgumentOutOfRangeException">When index is greater than or equal to count.</exception>
     public void RemoveAt(Int32 index)
     {
-        if ((UInt32)index >= (UInt32)_count)
+        if ((UInt32)index >= (UInt32)Count)
             throw new ArgumentOutOfRangeException(nameof(index));
 
         Int32 sourceIndex = index + 1;
-        Array.Copy(_array, sourceIndex, _array, index, _count - sourceIndex);
-        _count = _count - 1;
+        Array.Copy(_array, sourceIndex, _array, index, Count - sourceIndex);
+        Count = Count - 1;
 #pragma warning disable CS8601 // Possible null reference assignment.
-        _array[_count] = default;
+        _array[Count] = default;
 #pragma warning restore CS8601 // Possible null reference assignment.
     }
     IEnumerator IEnumerable.GetEnumerator() => new Enumerator(this);
     public IEnumerator<T> GetEnumerator() => new Enumerator(this);
+    #endregion Public Methods
 
     #region Protected Methods
     protected void EnsureCapacity(Int32 requiredCapacity)
@@ -213,9 +208,30 @@ public class List<T> : IList<T>
             newCapacity = MaxArrayLength;
         if (newCapacity < requiredCapacity)
             newCapacity = requiredCapacity;
-        Capacity = newCapacity;
+        SetCapacity(newCapacity);
+    }
+
+    protected void SetCapacity(Int32 capacity)
+    {
+        if ((UInt32)capacity == (UInt32)Count)
+            return;
+        if (capacity.IsZero())
+        {
+            _array = _emptyArray;
+            return;
+        }
+
+        var newArray = new T[capacity];
+        Int32 length = capacity < Count ? capacity : Count;
+        if (!IsEmpty)
+            Array.Copy(_array, 0, newArray, 0, length);
+        _array = newArray;
     }
     #endregion Protected Methods
+
+    #region Private Methods
+    private void ResetCount() => Count = 0;
+    #endregion Private Methods
 
     #region Enumerator
     public struct Enumerator : IEnumerator<T>, IEnumerator
@@ -243,7 +259,7 @@ public class List<T> : IList<T>
         {
             get
             {
-                if ((UInt32)_index > (UInt32)_vList._count)
+                if ((UInt32)_index > (UInt32)_vList.Count)
                     throw new ArgumentOutOfRangeException(nameof(_index));
 #pragma warning disable CS8603 // Possible null reference return.
                 return _current;
@@ -265,14 +281,14 @@ public class List<T> : IList<T>
         }
         public Boolean MoveNext()
         {
-            if ((UInt32)_index < (UInt32)_vList._count)
+            if ((UInt32)_index < (UInt32)_vList.Count)
             {
                 _current = _vList._array[_index];
                 _index = _index + 1;
                 return true;
             }
 
-            _index = _vList._count + 1;
+            _index = _vList.Count + 1;
 #pragma warning disable CS8601 // Possible null reference assignment.
             _current = default;
 #pragma warning restore CS8601 // Possible null reference assignment.
