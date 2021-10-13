@@ -131,7 +131,7 @@ public class List<T> : IList<T>
     }
     public void CopyTo(T[] array, Int32 arrayIndex) => throw new NotImplementedException();
 
-    /// <summary> Gets the index of the item. </summary>
+    /// <summary> Gets the index of the item if it exists, -1 otherwise. </summary>
     /// <param name="item">The item.</param>
     /// <returns></returns>
     public Int32 IndexOf(T item)
