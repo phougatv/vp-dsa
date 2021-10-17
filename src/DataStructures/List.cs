@@ -23,6 +23,7 @@ public class List<T> : IList<T>
         {
             if ((UInt32)index >= (UInt32)Count)
                 throw new ArgumentOutOfRangeException(nameof(index));
+            
             return _array[index];
         }
         set
@@ -161,7 +162,17 @@ public class List<T> : IList<T>
     /// <param name="index">The index.</param>
     /// <param name="item">The item.</param>
     /// <exception cref="NotImplementedException"></exception>
-    public void Insert(Int32 index, T item) => throw new NotImplementedException();
+    public void Insert(Int32 index, T item)
+    {
+        if ((UInt32)index >= (UInt32)Count)
+            throw new ArgumentOutOfRangeException(nameof(index));
+        if (IsCapacityMatched)
+            EnsureCapacity(Count + 1);
+
+        Array.Copy(_array, index, _array, index + 1, Count - index);
+        _array[index] = item;
+        Count = Count + 1;
+    }
 
     /// <summary> Removes the first occurrence of the item from the list. </summary>
     /// <param name="item">The item.</param>
@@ -169,7 +180,8 @@ public class List<T> : IList<T>
     public Boolean Remove(T item)
     {
         Int32 index = IndexOf(item);
-        if (index.IsNegative()) return false;
+        if (index.IsNegative())
+            return false;
 
         RemoveAt(index);
         return true;
@@ -177,11 +189,11 @@ public class List<T> : IList<T>
 
     /// <summary> Removes the element at the specified index, if the index is valid. </summary>
     /// <param name="index">The index.</param>
-    /// <exception cref="ArgumentOutOfRangeException">When index is greater than or equal to count.</exception>
+    /// <exception cref="InvalidOperationException">When index is greater than or equal to count.</exception>
     public void RemoveAt(Int32 index)
     {
         if ((UInt32)index >= (UInt32)Count)
-            throw new ArgumentOutOfRangeException(nameof(index));
+            throw new InvalidOperationException($"{nameof(index)} cannot be greater or equal to Count.");
 
         Int32 sourceIndex = index + 1;
         Array.Copy(_array, sourceIndex, _array, index, Count - sourceIndex);
@@ -238,7 +250,7 @@ public class List<T> : IList<T>
     {
         #region Private Fields
         private Int32 _index;
-        private List<T> _vList;
+        private List<T> _list;
         private T _current;
         #endregion Private Fields
 
@@ -248,7 +260,7 @@ public class List<T> : IList<T>
 #pragma warning restore CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider declaring as nullable.
         {
             _index = 0;
-            _vList = vList ?? throw new ArgumentNullException(nameof(vList));
+            _list = vList ?? throw new ArgumentNullException(nameof(vList));
 #pragma warning disable CS8601 // Possible null reference assignment.
             _current = default;
 #pragma warning restore CS8601 // Possible null reference assignment.
@@ -259,7 +271,7 @@ public class List<T> : IList<T>
         {
             get
             {
-                if ((UInt32)_index > (UInt32)_vList.Count)
+                if ((UInt32)_index > (UInt32)_list.Count)
                     throw new ArgumentOutOfRangeException(nameof(_index));
 #pragma warning disable CS8603 // Possible null reference return.
                 return _current;
@@ -273,7 +285,7 @@ public class List<T> : IList<T>
         {
             _index = 0;
 #pragma warning disable CS8625 // Cannot convert null literal to non-nullable reference type.
-            _vList = null;
+            _list = null;
 #pragma warning restore CS8625 // Cannot convert null literal to non-nullable reference type.
 #pragma warning disable CS8601 // Possible null reference assignment.
             _current = default;
@@ -281,14 +293,14 @@ public class List<T> : IList<T>
         }
         public Boolean MoveNext()
         {
-            if ((UInt32)_index < (UInt32)_vList.Count)
+            if ((UInt32)_index < (UInt32)_list.Count)
             {
-                _current = _vList._array[_index];
+                _current = _list._array[_index];
                 _index = _index + 1;
                 return true;
             }
 
-            _index = _vList.Count + 1;
+            _index = _list.Count + 1;
 #pragma warning disable CS8601 // Possible null reference assignment.
             _current = default;
 #pragma warning restore CS8601 // Possible null reference assignment.
