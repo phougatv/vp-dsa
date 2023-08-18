@@ -1,4 +1,4 @@
-﻿namespace VP.DataStructures.Linear.DynamicArray;
+﻿namespace VP.DataStructure.Linear.DynamicArray;
 public interface IMyList : IEnumerable<Int32>
 {
 	/// <summary>
