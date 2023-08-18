@@ -1,6 +1,6 @@
-﻿namespace VP.Dsa.Test.Linear.UnitTest.DynamicArray.MyList;
+﻿namespace VP.DataStructures.Test.Linear.UnitTest.DynamicArray.MyList;
 
-using VP.Dsa.Linear.DynamicArray;
+using VP.DataStructures.Linear.DynamicArray;
 
 public class ContainsShould
 {

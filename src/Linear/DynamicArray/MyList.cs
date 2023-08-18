@@ -1,4 +1,4 @@
-﻿namespace VP.Dsa.Linear.DynamicArray;
+﻿namespace VP.DataStructures.Linear.DynamicArray;
 
 using System.Collections;
 using System.Collections.Generic;
@@ -53,7 +53,7 @@ public class MyList : IMyList
 	public MyList()
 		: this(0)
 	{
-		
+
 	}
 
 	public MyList(Int32 capacity)
@@ -110,11 +110,7 @@ public class MyList : IMyList
 	public void RemoveAt(Int32 index)
 	{
 		if ((UInt32)index >= (UInt32)Count) throw new ArgumentOutOfRangeException(nameof(index));
-		if (index < Count - 1)
-		{
-			Array.Copy(_items, index + 1, _items, index, Count - index - 1);
-		}
-
+		if (index < Count - 1) Array.Copy(_items, index + 1, _items, index, Count - index - 1);
 		_items[--Count] = default;
 	}
 	public void Sort() => Array.Sort(_items, 0, Count);
