@@ -5,5 +5,7 @@
 /.vs
 /src/Linear/bin
 /src/Linear/obj
-/test/Linear/bin
-/test/Linear/obj
+/test/Linear/ClientFirstDesign/bin
+/test/Linear/ClientFirstDesign/obj
+/test/Linear/UnitTest/bin
+/test/Linear/UnitTest/obj
