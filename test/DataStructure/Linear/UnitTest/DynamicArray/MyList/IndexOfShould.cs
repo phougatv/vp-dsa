@@ -1,4 +1,4 @@
-﻿namespace VP.DataStructure.Test.Linear.UnitTest.DynamicArray.MyList;
+﻿namespace VP.Test.DataStructure.Linear.UnitTest.DynamicArray.MyList;
 
 using VP.DataStructure.Linear.DynamicArray;
 

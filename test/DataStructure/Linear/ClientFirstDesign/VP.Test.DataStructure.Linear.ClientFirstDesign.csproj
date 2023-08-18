@@ -8,7 +8,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\..\src\DataStructure\Linear\VP.DataStructure.Linear.csproj" />
+    <ProjectReference Include="..\..\..\..\src\DataStructure\Linear\VP.DataStructure.Linear.csproj" />
   </ItemGroup>
 
 </Project>

@@ -1,4 +1,4 @@
-﻿namespace VP.DataStructure.Test.Linear.ClientFirstDesign;
+﻿namespace VP.Test.DataStructure.Linear.ClientFirstDesign;
 
 using VP.DataStructure.Linear.DynamicArray;
 
