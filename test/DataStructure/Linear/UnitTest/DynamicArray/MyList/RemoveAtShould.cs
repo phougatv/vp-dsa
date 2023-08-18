@@ -1,7 +1,6 @@
-﻿namespace VP.DataStructures.Test.Linear.UnitTest.DynamicArray.MyList;
+﻿namespace VP.DataStructure.Test.Linear.UnitTest.DynamicArray.MyList;
 
-using System;
-using VP.DataStructures.Linear.DynamicArray;
+using VP.DataStructure.Linear.DynamicArray;
 
 public class RemoveAtShould
 {

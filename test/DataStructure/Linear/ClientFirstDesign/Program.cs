@@ -1,6 +1,6 @@
-﻿namespace VP.Dsa.Test.Linear.ClientFirstDesign;
+﻿namespace VP.DataStructure.Test.Linear.ClientFirstDesign;
 
-using VP.DataStructures.Linear.DynamicArray;
+using VP.DataStructure.Linear.DynamicArray;
 
 public class Program
 {

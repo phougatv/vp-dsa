@@ -1,8 +1,7 @@
-﻿namespace VP.DataStructures.Linear.DynamicArray;
+﻿namespace VP.DataStructure.Linear.DynamicArray;
 
 using System.Collections;
 using System.Collections.Generic;
-using VP.DataStructure.Linear.DynamicArray;
 
 public class MyList : IMyList
 {

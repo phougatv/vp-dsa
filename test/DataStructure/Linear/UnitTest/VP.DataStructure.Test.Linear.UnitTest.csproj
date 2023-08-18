@@ -23,7 +23,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\..\src\Linear\VP.DataStructures.Linear.csproj" />
+    <ProjectReference Include="..\..\..\src\DataStructure\Linear\VP.DataStructure.Linear.csproj" />
   </ItemGroup>
 
 </Project>
