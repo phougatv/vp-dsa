@@ -1,11 +1,30 @@
 {
   "version": 3,
   "targets": {
-    "net6.0": {}
+    "net6.0": {
+      "VP.DataStructures.Linear/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v6.0",
+        "compile": {
+          "bin/placeholder/VP.DataStructures.Linear.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/VP.DataStructures.Linear.dll": {}
+        }
+      }
+    }
   },
-  "libraries": {},
+  "libraries": {
+    "VP.DataStructures.Linear/1.0.0": {
+      "type": "project",
+      "path": "../../../src/Linear/VP.DataStructures.Linear.csproj",
+      "msbuildProject": "../../../src/Linear/VP.DataStructures.Linear.csproj"
+    }
+  },
   "projectFileDependencyGroups": {
-    "net6.0": []
+    "net6.0": [
+      "VP.DataStructures.Linear >= 1.0.0"
+    ]
   },
   "packageFolders": {
     "C:\\Users\\Vedant\\.nuget\\packages\\": {}
@@ -13,9 +32,9 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Source\\vp-dsa\\test\\Linear\\ClientFirstDesign\\VP.Dsa.Test.Linear.ClientFirstDesign.csproj",
-      "projectName": "VP.Dsa.Test.Linear.ClientFirstDesign",
-      "projectPath": "C:\\Source\\vp-dsa\\test\\Linear\\ClientFirstDesign\\VP.Dsa.Test.Linear.ClientFirstDesign.csproj",
+      "projectUniqueName": "C:\\Source\\vp-dsa\\test\\Linear\\ClientFirstDesign\\VP.DataStructures.Test.Linear.ClientFirstDesign.csproj",
+      "projectName": "VP.DataStructures.Test.Linear.ClientFirstDesign",
+      "projectPath": "C:\\Source\\vp-dsa\\test\\Linear\\ClientFirstDesign\\VP.DataStructures.Test.Linear.ClientFirstDesign.csproj",
       "packagesPath": "C:\\Users\\Vedant\\.nuget\\packages\\",
       "outputPath": "C:\\Source\\vp-dsa\\test\\Linear\\ClientFirstDesign\\obj\\",
       "projectStyle": "PackageReference",
@@ -33,7 +52,11 @@
       "frameworks": {
         "net6.0": {
           "targetAlias": "net6.0",
-          "projectReferences": {}
+          "projectReferences": {
+            "C:\\Source\\vp-dsa\\src\\Linear\\VP.DataStructures.Linear.csproj": {
+              "projectPath": "C:\\Source\\vp-dsa\\src\\Linear\\VP.DataStructures.Linear.csproj"
+            }
+          }
         }
       },
       "warningProperties": {
