@@ -6,11 +6,4 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
-  <ItemGroup>
-    <Folder Include="CacheReplacementPolicies\" />
-    <Folder Include="LinkedList\" />
-    <Folder Include="Queue\" />
-    <Folder Include="Stack\" />
-  </ItemGroup>
-
 </Project>
