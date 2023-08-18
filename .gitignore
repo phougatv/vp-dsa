@@ -3,5 +3,7 @@
 ################################################################################
 
 /.vs
-/src/Linear/bin/Debug/net6.0
-/src/Linear/obj/Debug/net6.0
+/src/Linear/bin
+/src/Linear/obj
+/test/Linear/bin
+/test/Linear/obj
